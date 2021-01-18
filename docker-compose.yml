@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  elasticsearch:
+    build: 
+      context: .
+    container_name: 'elastic'
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    ports:
+      - "9200:9200"
+    tty: true
+    volumes:
+      - "./tmp/:/tmp/"
+      - "./opt/elastic:/opt/elastic"
+      - "./opt/kibana:/opt/kibana"
+      - "./opt/jdk:/opt/jdk"
+   
+
+  logstash:
+    image: centos:7 #docker.elastic.co/logstash/logstash:7.10.1
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    container_name: 'logstash'
+    tty: true
+#    volumes:
+#      - "./tmp_logstash/:/tmp/"
+#      - "./opt_logstash/jdk:/opt/jdk"
+#      - "./opt_logstash/logstash:/etc/logstash"
+
+networks:
+  default:
+    external:
+      name: "sirius-network"

@@ -1,0 +1,6 @@
+/.REA.swp
+.idea/*
+playbook/.idea/*
+playbook/roles/*
+roles/*
+
